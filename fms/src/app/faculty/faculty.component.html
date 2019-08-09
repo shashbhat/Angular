@@ -38,7 +38,31 @@
   <!-- Charts -->
   <div class="col-sm-4">
 
-    <google-chart [data]="pieChart"></google-chart>
+    <select name="" id="">
+      <option [(ngModel)]="PIE">PIE</option>
+      <option [(ngModel)]="Col">COLUMN</option>
+    </select>
+    <google-chart [data]="pieChart" (chartSelect)="getFacultyByDname($event)"></google-chart>
+    <ng-container *ngIf="chartResults[0]">
+      <table class="table table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th>EmpNo</th>
+            <th>Name</th>
+            <th>Qualification</th>
+            <th>Dept</th>
+
+          </tr>
+        </thead>
+        <tr *ngFor="let faculty of chartResults" class="bg-warning">
+          <td>{{faculty.empno}}</td>
+          <td>{{faculty.ename}}</td>
+          <td>{{faculty.qualification}}</td>
+          <td>{{faculty.dname}}</td>
+
+        </tr>
+      </table>
+    </ng-container>
   </div>
 
 </div>

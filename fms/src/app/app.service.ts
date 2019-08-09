@@ -6,6 +6,7 @@ import { Faculty } from './shared/faculty.model';
   providedIn: 'root'
 })
 export class AppService {
+ 
 
   f_list: Faculty[] = []
 
@@ -44,4 +45,18 @@ export class AppService {
 
     return data;
   }
+
+  getFacultyByDname(dname: string) {
+    const f = this.f_list.filter((faculty) =>
+      {
+        if(faculty.dname === dname){
+          return true;
+        }
+        else{
+          return false;
+        }
+      }); 
+      return f;
+  }
+
 }
