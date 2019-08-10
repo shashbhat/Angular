@@ -7,6 +7,7 @@ import { Faculty } from './shared/faculty.model';
 })
 export class AppService {
  
+ 
 
   f_list: Faculty[] = []
 
@@ -50,5 +51,16 @@ export class AppService {
     const f = this.f_list.filter(x => x.dname === dname) 
       return f;
   }
+
+  addFaculty(faculty: Faculty) {
+    this.f_list.push(faculty);
+  }
+
+
+
+
+
+
+
 
 }

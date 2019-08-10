@@ -4,6 +4,7 @@ import { AppService } from '../app.service';
 import { Faculty } from '../shared/faculty.model';
 import { GoogleChartInterface } from 'ng2-google-charts/google-charts-interfaces';
 import { ChartSelectEvent } from 'ng2-google-charts';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-faculty',
@@ -18,11 +19,19 @@ export class FacultyComponent implements OnInit {
   searchFaculty: Faculty[] = [];
   f_dname_list: Faculty[] = [];
   chartResults: Faculty[] = [];
-  chartType = 'PieChart'
-  constructor(private appService: AppService) {
+  chartType = 'PieChart';
+  f_form:any;
+
+  constructor(private appService: AppService, private fb:FormBuilder) {
   }
 
   ngOnInit() {
+    this.f_form = this.fb.group({
+      empno:['', Validators.required],
+      ename:['', Validators.required],
+      dname:['', Validators.required],
+      qualification:['', Validators.required]
+    })
   }
 
   getSearchResult() {
@@ -58,6 +67,28 @@ export class FacultyComponent implements OnInit {
     ccComponent.draw();
   }
 
+  submitForm(){
+
+    let faculty:Faculty = this.f_form.value;
+    this.appService.addFaculty(faculty);
+    this.f_form.reset();
+  }
+
+  get empno(){
+    return this.f_form.get("empno")
+  }
+
+  get ename(){
+    return this.f_form.get("ename")
+  }
+
+  get qualification(){
+    return this.f_form.get("qualification")
+  }
+
+  get dname(){
+    return this.f_form.get("dname")
+  }
 }
 
 
