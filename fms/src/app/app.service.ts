@@ -47,15 +47,7 @@ export class AppService {
   }
 
   getFacultyByDname(dname: string) {
-    const f = this.f_list.filter((faculty) =>
-      {
-        if(faculty.dname === dname){
-          return true;
-        }
-        else{
-          return false;
-        }
-      }); 
+    const f = this.f_list.filter(x => x.dname === dname) 
       return f;
   }
 

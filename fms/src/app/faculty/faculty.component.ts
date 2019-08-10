@@ -18,6 +18,7 @@ export class FacultyComponent implements OnInit {
   searchFaculty: Faculty[] = [];
   f_dname_list: Faculty[] = [];
   chartResults: Faculty[] = [];
+  chartType = 'PieChart'
   constructor(private appService: AppService) {
   }
 
@@ -33,7 +34,7 @@ export class FacultyComponent implements OnInit {
   }
 
   public pieChart: GoogleChartInterface = {
-    chartType: 'PieChart',
+    chartType: this.chartType,
     dataTable: this.appService.getDeptCount(),
     //opt_firstRowIsData: true,
     options: { 'title': 'Faculties' },
@@ -44,6 +45,17 @@ export class FacultyComponent implements OnInit {
     let dname = event.selectedRowFormattedValues[0]
     const result = this.appService.getFacultyByDname(dname)
     this.chartResults = result;
+  }
+
+
+  
+  changeChart() {
+    const ccComponent = this.pieChart.component;
+    const ccWrapper = ccComponent.wrapper;
+    ccWrapper.setChartType(this.chartType);
+
+    //force a redraw
+    ccComponent.draw();
   }
 
 }

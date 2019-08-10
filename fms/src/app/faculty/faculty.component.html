@@ -1,8 +1,20 @@
 <div class="row mt-2">
-
   <!-- Add faculty form -->
   <div class="col-sm-2">
+    <form action="">
+      <div class="form-group">
+        <h5>Add New Faculty</h5>
+        <input type="text" name="empno" id="empno" class="form-control form-control-sm" placeholder="Enter Emp Number">
+      </div>
 
+
+      <div class="form-group">
+        <input type="text" name="ename" id="ename" class="form-control form-control-sm" placeholder="Enter Full Name">
+      </div>
+
+      <button class="btn bg-primary text-white">Add Faculty</button>
+
+    </form>
   </div>
 
   <!-- Logic to search and display -->
@@ -24,7 +36,7 @@
 
           </tr>
         </thead>
-        <tr *ngFor="let f of searchFaculty" class="bg-warning">
+        <tr *ngFor="let f of searchFaculty">
           <td>{{f.empno}}</td>
           <td>{{f.ename}}</td>
           <td>{{f.qualification}}</td>
@@ -38,9 +50,9 @@
   <!-- Charts -->
   <div class="col-sm-4">
 
-    <select name="" id="">
-      <option [(ngModel)]="PIE">PIE</option>
-      <option [(ngModel)]="Col">COLUMN</option>
+    <select [(ngModel)]="chartType" (change)="changeChart()">
+      <option [(ngModel)]="PieChart">Pie Chart</option>
+      <option [(ngModel)]="ColumnChart">Column Chart</option>
     </select>
     <google-chart [data]="pieChart" (chartSelect)="getFacultyByDname($event)"></google-chart>
     <ng-container *ngIf="chartResults[0]">
@@ -54,7 +66,7 @@
 
           </tr>
         </thead>
-        <tr *ngFor="let faculty of chartResults" class="bg-warning">
+        <tr *ngFor="let faculty of chartResults">
           <td>{{faculty.empno}}</td>
           <td>{{faculty.ename}}</td>
           <td>{{faculty.qualification}}</td>
